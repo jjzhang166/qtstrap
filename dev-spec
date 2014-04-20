@@ -1,0 +1,53 @@
+namespace qtstrap; (from qt and bootstrap)
+
+widgets (inherited from Qt widgets)
+-------------------------------------
+(remove styled_ prefix?)
+styled_button
+styled_label
+styled_dialog
+styled_checkbox
+styled_combobox
+styled_date_edit
+styled_time_edit
+styled_date_time_edit
+styled_dial
+styled_spinbox
+styled_line_edit
+styled_menu
+styled_progress_bar
+styled_radio_button
+styled_scroll_bar
+styled_slider
+styled_tab_bar
+styled_tab_widget
+styled_toolbox
+styled_tool_button (?)
+styled_widget (base class for all styled ones)
+styled_calendar_widget
+...to-be-continued...
+
+custom widgets (complex and/or cool widgets)
+--------------------------------------------
+delete_button
+share_button (not the social_share_button)
+tag_widget
+tooltip
+accordion
+search_edit
+menu_box
+comment_box
+ultimate_chooser
+timer_widget
+avatar_widget
+flip_widget
+image_widget
+more_widget
+notification_widget
+...to-be-continued...
+
+animations/effects
+---------------------
+easing
+bounce
+.... (other jQuery effects)
