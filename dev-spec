@@ -51,3 +51,17 @@ animations/effects
 easing
 bounce
 .... (other jQuery effects)
+
+
+Classes::Detailed
+------------------
+styled_button
+ - color, pressed_color, hover_color : color_t, QString
+ - category : styled_button_category (?) (primary, success, warning, inverse, info, danger, default, disabled)
+ - indicator : indicator_t (position, color, tooltip, autohide(?), type {circle, square, bar}, text,
+                  - signals{indicator_highlighted, indicator_removed, indicator_set},
+                  - slots{remove_indicator, set_indicator, indicator_set_color, indicator_toggle_color} )
+ - minimum_size_appearance (change color, text or something else when size is minimum)
+ - maximum_size_appearance (---)
+ - menu { change_button_text_to_selected(?),  }
+ - effect 
