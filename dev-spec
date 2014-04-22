@@ -57,8 +57,20 @@ bounce
 
 Classes::Detailed
 ------------------
+widget_style (generator-class of widget's styles)
+ - property {name, value} (adds to property collection)
+ - property {property_t* {name, attributes(with names and values), value}, value=""}
+ - style_code (generated style code)
+ - widget_name (the widget name)
+ - state_property (adds to state_property collection)
+
+styled_widget_base (base class for all styled widgets)
+ - effect 
+ - style (widget_style*)
+ - padding
+
 styled_button
- - color, pressed_color, hover_color : color_t, QString
+ - color, pressed_color, hover_color, border_color, text_color : color_t, QString
  - category : styled_button_category (?) (primary, success, warning, inverse, info, danger, default, disabled)
  - indicator : indicator_t (position, color, tooltip, autohide(?), type {circle, square, bar}, text,
                   - signals{indicator_highlighted, indicator_removed, indicator_set},
@@ -66,4 +78,32 @@ styled_button
  - minimum_size_appearance (change color, text or something else when size is minimum)
  - maximum_size_appearance (---)
  - menu { change_button_text_to_selected(?),  }
- - effect 
+ - rounded {full, position, value}
+
+styled_label
+ - color, text_color, border_color, hover_color, pressed_color : color_t, QString
+ - indicator (from styled_button)
+ - minimum_size_appearance
+ - maximum_size_appearance
+ - set_toggled
+ - direction (horizontal, vertical)
+ 
+styled_dialog
+ - color, text_color, border_color
+ - type (blank, info, ok_cancel, yes_no, login/register, share, wizard, ...)
+ - pages (collection of styled_dialog*)
+ 
+styled_checkbox
+ - color
+ - indicator {size, hover, checked, unchecked, pressed}
+ - spacing
+ - rounded (?)
+
+styled_combobox
+ - color(s)
+ - drop-down (?, on-implementation)
+ - editable (?, on-implementation)
+ - down_arrow {image, size, padding}
+
+styled_date_edit
+ - 
