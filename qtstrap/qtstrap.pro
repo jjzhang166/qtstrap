@@ -13,6 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        main_window.cpp
+        main_window.cpp \
+    widget_style.cpp \
+    style_property.cpp \
+    styled_button.cpp \
+    test/styled_button_test.cpp
 
-HEADERS  += main_window.h
+HEADERS  += main_window.h \
+    widget_style.h \
+    style_property.h \
+    styled_button.h \
+    test/styled_button_test.h
