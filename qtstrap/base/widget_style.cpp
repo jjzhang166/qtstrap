@@ -3,8 +3,13 @@
 namespace qtstrap
 {
 
+namespace base
+{
+
 widget_style::widget_style()
 {
 }
+
+} // namespace base
 
 } // namespace qtstrap

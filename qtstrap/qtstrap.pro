@@ -14,13 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         main_window.cpp \
-    widget_style.cpp \
     style_property.cpp \
     styled_button.cpp \
-    test/styled_button_test.cpp
+    base/style_components.cpp \
+    base/widget_style.cpp \
+    test/widget_style_tester.cpp \
+    test/styled_button_tester.cpp \
+    utility.cpp
 
 HEADERS  += main_window.h \
-    widget_style.h \
     style_property.h \
     styled_button.h \
-    test/styled_button_test.h
+    base/style_components.h \
+    base/widget_style.h \
+    test/widget_style_tester.h \
+    test/styled_button_tester.h \
+    utility.h

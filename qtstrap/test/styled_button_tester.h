@@ -1,5 +1,5 @@
-#ifndef STYLED_BUTTON_TEST_H
-#define STYLED_BUTTON_TEST_H
+#ifndef QTSTRAP_TEST_STYLED_BUTTON_TESTER_H
+#define QTSTRAP_TEST_STYLED_BUTTON_TESTER_H
 
 namespace qtstrap
 {
@@ -7,16 +7,17 @@ namespace qtstrap
 namespace test
 {
 
-class styled_button_test
+class styled_button_tester
 {
 public:
-    styled_button_test();
+    styled_button_tester();
 
 public:
     static void start_complete_test();
 
 public:
     static void test_default_creation();
+    static void test_types();
     static void test_categories();
     static void test_colors();
     static void test_states();
@@ -27,12 +28,15 @@ public:
     static void test_menu();
     static void test_rounded();
 
+private:
+    static void test_colors_private_(styled_color::color_value);
+
 public:
-    static bool
+    static void test_click();
 
 private:
-    styled_button_test(const styled_button_test&);
-    styled_button_test& operator=(const styled_button_test&);
+    styled_button_tester(const styled_button_tester&);
+    styled_button_tester& operator=(const styled_button_tester&);
 
 }; // class styled_button_test
 
@@ -40,4 +44,4 @@ private:
 
 } // namespace qtstrap
 
-#endif // STYLED_BUTTON_TEST_H
+#endif // QTSTRAP_TEST_STYLED_BUTTON_TESTER_H

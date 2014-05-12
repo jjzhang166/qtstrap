@@ -1,7 +1,10 @@
-#ifndef QTSTRAP_WIDGET_STYLE_H
-#define QTSTRAP_WIDGET_STYLE_H
+#ifndef QTSTRAP_BASE_WIDGET_STYLE_H
+#define QTSTRAP_BASE_WIDGET_STYLE_H
 
 namespace qtstrap
+{
+
+namespace base
 {
 
 /**
@@ -22,6 +25,8 @@ private:
 
 }; // class widget_style
 
+} // namespace base
+
 } // namespace qtstrap
 
-#endif // QTSTRAP_WIDGET_STYLE_H
+#endif // QTSTRAP_BASE_WIDGET_STYLE_H
