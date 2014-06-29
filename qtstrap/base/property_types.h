@@ -1,0 +1,4 @@
+#ifndef PROPERTY_TYPES_H
+#define PROPERTY_TYPES_H
+
+#endif // PROPERTY_TYPES_H
