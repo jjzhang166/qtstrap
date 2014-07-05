@@ -1,16 +1,23 @@
-#ifndef STYLED_BUTTON_H
-#define STYLED_BUTTON_H
+#ifndef QTSTRAP_STYLED_BUTTON_H
+#define QTSTRAP_STYLED_BUTTON_H
+
+#include "base/styled_widget.h"
 
 #include <QPushButton>
 
 namespace qtstrap
 {
 
-class styled_button : public QPushButton
+class styled_button :
+        public QPushButton,
+        public base::styled_widget
 {
     Q_OBJECT
 public:
     explicit styled_button(QWidget *parent = 0);
+
+public:
+    virtual QString widget_name() const { return "QPushButton"; }
 
 signals:
 
@@ -20,4 +27,4 @@ public slots:
 
 } // namespace qtstrap
 
-#endif // STYLED_BUTTON_H
+#endif // QTSTRAP_STYLED_BUTTON_H

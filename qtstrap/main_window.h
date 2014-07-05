@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+namespace qtstrap
+{
+
 class main_window : public QMainWindow
 {
     Q_OBJECT
@@ -10,6 +13,8 @@ class main_window : public QMainWindow
 public:
     main_window(QWidget *parent = 0);
     ~main_window();
-};
+}; // class main_window
+
+} // namespace qtstrap
 
 #endif // MAIN_WINDOW_H

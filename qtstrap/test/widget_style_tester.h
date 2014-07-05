@@ -14,6 +14,9 @@ public:
 
 public:
     static void start_test();
+
+public:
+    static void test_border_styling();
 }; // class widget_style_test
 
 } // namespace test

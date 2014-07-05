@@ -14,11 +14,12 @@ widget_style_tester::widget_style_tester()
 
 void widget_style_tester::start_test()
 {
-
+    test_border_styling();
 }
 
 void widget_style_tester::test_border_styling()
 {
+    /*
     base::widget_style* ws = new base::widget_style();
     ws->set_property(base::style_component::border(), "1px dotted red");
     ws->add_property(new base::border_property("1px solid black"));
@@ -36,6 +37,7 @@ void widget_style_tester::test_border_styling()
     btw->set_value(4);
     ws->set_property(base::style_component::border_top_width(), btw);
     ws->add_property(btw);
+    */
 }
 
 } // namespace test

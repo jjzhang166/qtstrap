@@ -1,6 +1,8 @@
 #ifndef QTSTRAP_BASE_WIDGET_STYLE_H
 #define QTSTRAP_BASE_WIDGET_STYLE_H
 
+#include "styled_color.h"
+
 namespace qtstrap
 {
 

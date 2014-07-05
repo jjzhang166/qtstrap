@@ -3,7 +3,7 @@
 
 #include <QString>
 
-#include "../utility.h"
+class QColor;
 
 namespace qtstrap
 {
@@ -17,6 +17,17 @@ class style_component
 public:
     static QString colon() { return ":"; }
     static QString semicolon() { return ";"; }
+    static QString comma() { return ","; }
+    static QString parenthesis_open() { return "("; }
+    static QString parenthesis_close() { return ")"; }
+    static QString bracket_open() { return "["; }
+    static QString bracket_close() { return "]"; }
+    static QString angle_bracket_open() { return "<"; }
+    static QString angle_bracket_close() { return ">"; }
+    static QString brace_open() { return "{"; }
+    static QString brace_close() { return "}"; }
+
+    static QString whitespace() { return " "; }
 
     /// @brief Properties
 public:
@@ -58,7 +69,6 @@ public:
     static QString border_bottom() { return "border-bottom"; }
     static QString border_left() { return "border-left"; }
 
-    static QString border_color() { return "border-color"; }
     static QString border_image() { return "border-image"; }
 
     static QString border_radius() { return "border-radius"; }
@@ -101,505 +111,69 @@ public:
     static QString padding_right() { return "padding-right"; }
     static QString padding_left() { return "padding-left"; }
     static QString padding_bottom() { return "padding-bottom"; }
-};
 
-/// @brief base class for all properties
-struct property
-{    
+    static QString spacing() { return "spacing"; }
+    static QString width() { return "width"; }
+
+    static QString button_layout() { return "button-layout"; }
+    static QString height() { return "height"; }
+    static QString icon_size() { return "icon-size"; }
+    static QString lineedit_password_character() { return "lineedit-password-character"; }
+    static QString messagebox_text_interaction_flags() { return "messagebox-text-interaction-flags"; }
+    static QString opacity() { return "opacity"; }
+
+    static QString font() { return "font"; }
+    static QString font_family() { return "font-family"; }
+    static QString paint_alternating_row_colors_for_empty_area()
+    { return "paint-alternating-row-colors-for-empty-area"; }
+
+    static QString font_size() { return "font-size"; }
+    static QString font_style() { return "font-style"; }
+    static QString font_weight() { return "font-weight"; }
+
+    static QString gridline_color() { return "gridline-color"; }
+
+    static QString image() { return "image"; }
+
+    static QString position() { return "position"; }
+    static QString text_decoration() { return "text-decoration"; }
+
+    static QString center() { return "center"; }
+
+    /// property values
 public:
-    virtual QString name() const = 0;
-    virtual ~property() {}
+    static QString scroll() { return "scroll"; }
+    static QString fixed() { return "fixed"; }
 
+    static QString qlineargradient() { "qlineargradient"; }
+    static QString qradialgradient() { "qradialgradient"; }
+    static QString qconicalgradient() { "qconicalgradient"; }
+
+    static QString x() { return "x"; }
+    static QString y() { return "y"; }
+    static QString x1() { return "x1"; }
+    static QString y1() { return "y1"; }
+    static QString x2() { return "x2"; }
+    static QString y2() { return "y2"; }
+    static QString x3() { return "x3"; }
+    static QString y3() { return "y3"; }
+    static QString cx() { return "cx"; }
+    static QString cy() { return "cy"; }
+    static QString fx() { return "fx"; }
+    static QString fy() { return "fy"; }
+
+    static QString radius() { return "radius"; }
+    static QString angle() { return "angle"; }
+    static QString stop() { return "stop"; }
+
+    /// property types
 public:
-    void set_value(const QString& v) { m_value = v; }
+    static QString alignment_type_name() { return "Alignment"; }
+    static QString attachment_type_name() { return "Attachment"; }
+    static QString color_type_name() { return "Color"; }
+    static QString gradient_type_name() { return "Gradient"; }
 
-    QString value() const { return m_value; }
-
-public:
-    QString to_string()
-    {
-        return name() + style_component::colon()
-                + m_value + style_component::semicolon();
-    }
-
-private:
-    QString m_value;
-
-private:
-    property(const property&);
-    property& operator=(const property&);
-};
-
-struct background_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_color();
-    }
-
-public:
-    // check this moment
-    void set_value(styled_color::color_value v)
-    {
-        // TODO: convert to string and set
-    }
-};
-
-struct alternate_background_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::alternate_background_color();
-    }
-};
-
-struct border_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_color();
-    }
-};
-
-struct border_top_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_color();
-    }
-};
-
-struct border_left_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_left_color();
-    }
-};
-
-struct border_right_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_right_color();
-    }
-};
-
-struct border_bottom_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_color();
-    }
-};
-
-struct color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::color();
-    }
-};
-
-struct selection_background_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::selection_background_color();
-    }
-};
-
-struct background_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background();
-    }
-};
-
-struct background_image_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_image();
-    }
-};
-
-struct background_repeat_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_repeat();
-    }
-};
-
-struct background_position_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_position();
-    }
-};
-
-struct image_position_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::image_position();
-    }
-};
-
-struct subcontrol_position_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::subcontrol_position();
-    }
-};
-
-struct text_align_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::text_align();
-    }
-};
-
-struct background_attachment_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_attachment();
-    }
-};
-
-struct dialogbuttonbox_buttons_have_icons_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::dialogbuttonbox_buttons_have_icons();
-    }
-};
-
-struct show_decoration_selected_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::show_decoration_selected();
-    }
-};
-
-struct background_clip_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_clip();
-    }
-};
-
-struct background_origin_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_origin();
-    }
-};
-
-struct subcontrol_origin_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::subcontrol_origin();
-    }
-};
-
-struct border_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border();
-    }
-};
-
-struct border_top_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_top();
-    }
-};
-
-struct border_right_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_right();
-    }
-};
-
-struct border_bottom_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom();
-    }
-};
-
-struct border_left_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_left();
-    }
-};
-
-struct border_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_color();
-    }
-};
-
-struct border_image_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_image();
-    }
-};
-
-struct border_radius_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_radius();
-    }
-};
-
-struct border_top_left_radius_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_left_radius();
-    }
-};
-
-struct border_top_right_radius_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_right_radius();
-    }
-};
-
-struct border_bottom_right_radius_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_right_radius();
-    }
-};
-
-struct border_bottom_left_radius_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_left_radius();
-    }
-};
-
-struct border_style_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_style();
-    }
-};
-
-struct border_top_style_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_style();
-    }
-};
-
-struct border_right_style_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_right_style();
-    }
-};
-
-struct border_left_style_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_left_style();
-    }
-};
-
-struct border_bottom_style_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_style();
-    }
-};
-
-struct border_width_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::border_width();
-    }
-};
-
-struct margin_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::margin();
-    }
-};
-
-struct padding_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::padding();
-    }
-};
-
-struct bottom_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::bottom();
-    }
-};
-
-struct left_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::left();
-    }
-};
-
-struct right_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::right();
-    }
-};
-
-struct top_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::top();
-    }
-};
-
-struct margin_top_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::margin_top();
-    }
-};
-
-struct margin_right_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::margin_right();
-    }
-};
-
-struct margin_left_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::margin_left();
-    }
-};
-
-struct margin_bottom_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::margin_bottom();
-    }
-};
-
-struct max_height_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::max_height();
-    }
-};
-
-struct max_width_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::max_width();
-    }
-};
-
-struct min_height_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::min_height();
-    }
-};
-
-struct min_width_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::min_width();
-    }
-};
-
-struct padding_top_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::padding_top();
-    }
-};
-
-struct padding_right_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::padding_right();
-    }
-};
-
-struct padding_left_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::padding_left();
-    }
-};
-
-struct padding_bottom_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::padding_bottom();
-    }
-};
+}; // class style_component
 
 } // namespace base
 

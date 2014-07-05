@@ -1,6 +1,8 @@
 #ifndef QTSTRAP_TEST_STYLED_BUTTON_TESTER_H
 #define QTSTRAP_TEST_STYLED_BUTTON_TESTER_H
 
+#include "base/styled_color.h"
+
 namespace qtstrap
 {
 
@@ -20,16 +22,16 @@ public:
     static void test_types();
     static void test_categories();
     static void test_colors();
-    static void test_states();
-    static void test_indicator();
-    static void test_minimum_size_appearance();
-    static void test_maximum_size_appearance();
-    static void test_resizing();
-    static void test_menu();
-    static void test_rounded();
+    static bool test_states();
+    static bool test_indicator();
+    static bool test_minimum_size_appearance();
+    static bool test_maximum_size_appearance();
+    static bool test_resizing();
+    static bool test_menu();
+    static bool test_rounded();
 
 private:
-    static void test_colors_private_(styled_color::color_value);
+    static void test_colors_private_(base::styled_color::value);
 
 public:
     static void test_click();
