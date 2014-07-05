@@ -166,12 +166,33 @@ public:
     static QString angle() { return "angle"; }
     static QString stop() { return "stop"; }
 
+    static QString palette() { return "palette"; }
+    static QString alternate_base() { return "alternate-base"; }
+    static QString base() { return "base"; }
+    static QString bright_text() { return "bright-text"; }
+    static QString button() { return "button"; }
+    static QString button_text() { return "button-text"; }
+    static QString dark() { return "dark"; }
+    static QString highlight() { return "highlight"; }
+    static QString highlighted_text() { return "highlighted-text"; }
+    static QString light() { return "light"; }
+    static QString link() { return "link"; }
+    static QString link_visited() { return "link-visited"; }
+    static QString mid() { return "mid"; }
+    static QString midlight() { return "midlight"; }
+    static QString shadow() { return "shadow"; }
+    static QString text() { return "text"; }
+    static QString window() { return "window"; }
+    static QString window_text() { return "window-text"; }
+
     /// property types
 public:
     static QString alignment_type_name() { return "Alignment"; }
     static QString attachment_type_name() { return "Attachment"; }
     static QString color_type_name() { return "Color"; }
     static QString gradient_type_name() { return "Gradient"; }
+    static QString palette_role_type_name() { return "PaletteRole"; }
+    static QString brush_type_name() { return "Brush"; }
 
 }; // class style_component
 

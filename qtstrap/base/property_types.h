@@ -35,7 +35,7 @@ private:
 /// @struct alignment_property_t The Alignment property type
 struct alignment_property_t : virtual property_base_t
 {
-    enum value
+    enum alignment_values
     {
         TOP = 0,
         BOTTOM,
@@ -50,34 +50,35 @@ public:
 public:
     virtual QString type_name() const { return style_component::alignment_type_name(); }
 
-    void set_alignment(value v) { m_alignment = v; }
-    virtual QString value() const
+    void set_alignment(alignment_values v)
     {
-        switch (m_alignment)
+        switch (v)
         {
         case TOP:
-            return style_component::top();
+            m_alignment = style_component::top();
         case BOTTOM:
-            return style_component::bottom();
+            m_alignment = style_component::bottom();
         case LEFT:
-            return style_component::left();
+            m_alignment = style_component::left();
         case RIGHT:
-            return style_component::right();
+            m_alignment = style_component::right();
         case CENTER:
-            return style_component::center();
+            m_alignment = style_component::center();
+        default:
+            m_alignment = "";
         }
-        return "";
     }
+    virtual QString value() const { return m_alignment; }
 
 private:
-    value m_alignment;
+    QString m_alignment;
 
 }; // struct alignment_property_t
 
 /// @struct attachment_property_t The Attachment property type
 struct attachment_property_t : virtual property_base_t
 {
-    enum value
+    enum attachment_values
     {
         SCROLL = 0,
         FIXED
@@ -89,21 +90,22 @@ public:
 public:
     virtual QString type_name() const { return style_component::attachment_type_name(); }
 
-    void set_attachment(value v) { m_attachment = v; }
-    virtual QString value() const
+    void set_attachment(attachment_values v)
     {
-        switch (m_attachment)
+        switch (v)
         {
         case SCROLL:
-            return style_component::scroll();
+            m_attachment = style_component::scroll();
         case FIXED:
-            return style_component::fixed();
+            m_attachment = style_component::fixed();
+        default:
+            m_attachment = "";
         }
-        return "";
     }
+    virtual QString value() const { return m_attachment; }
 
 private:
-    value m_attachment;
+    QString m_attachment;
 
 }; // struct attachment_property_t
 
@@ -202,10 +204,10 @@ private:
     QString m_gradient;
 }; // struct gradient_property_t
 
-// CONTINUE HERE
+/// @struct palette_role_property_t The Palette role property
 struct palette_role_property_t : virtual property_base_t
 {
-    enum value
+    enum palette_role_values
     {
         ALTERNATE_BASE = 0,
         BASE,
@@ -226,10 +228,44 @@ struct palette_role_property_t : virtual property_base_t
         WINDOW_TEXT
     };
 
-    void set_palette_role(value v);
+    void set_palette_role(palette_role_values v)
+    {
+        switch (v)
+        {
+        case ALTERNATE_BASE: { m_palette_role = style_component::alternate_base(); }
+        case BASE: { m_palette_role = style_component::base(); }
+        case BRIGHT_TEXT: { m_palette_role = style_component::bright_text(); }
+        case BUTTON: { m_palette_role = style_component::button(); }
+        case BUTTON_TEXT: { m_palette_role = style_component::button_text(); }
+        case DARK: { m_palette_role = style_component::dark(); }
+        case HIGHLIGHT: { m_palette_role = style_component::highlight(); }
+        case HIGHLIGHTED_TEXT: { m_palette_role = style_component::highlighted_text(); }
+        case LIGHT: { m_palette_role = style_component::light(); }
+        case LINK: { m_palette_role = style_component::link(); }
+        case LINK_VISITED: { m_palette_role = style_component::link_visited(); }
+        case MID: { m_palette_role = style_component::mid(); }
+        case MIDLIGHT: { m_palette_role = style_component::midlight(); }
+        case SHADOW: { m_palette_role = style_component::shadow(); }
+        case TEXT: { m_palette_role = style_component::text(); }
+        case WINDOW: { m_palette_role = style_component::window(); }
+        case WINDOW_TEXT: { m_palette_role = style_component::window_text(); }
+        default: { m_palette_role = ""; }
+        }
+    }
+
+    virtual QString type_name() const { return style_component::palette_role_type_name(); }
+    virtual QString value() const
+    {
+        typedef style_component SC;
+        return SC::palette() + SC::bracket_open() + m_palette_role + SC::bracket_close();
+    }
+
+private:
+    QString m_palette_role;
 
 }; // struct palette_role_property_t
 
+/// @struct brush_property_t The Brush property, specifies a Color or a Gradient or an entry in the Palette.
 struct brush_property_t : color_property_t, gradient_property_t,
         palette_role_property_t
 {
@@ -245,14 +281,28 @@ struct brush_property_t : color_property_t, gradient_property_t,
         m_type = t;
     }
 
-    current_type brush_type() const { return m_type; }
+    brush_type brush_type() const { return m_type; }
     void set_brush_type(brush_type t) { m_type = t; }
+
+    virtual QString type_name() const { return style_component::brush_type_name(); }
+    virtual QString value() const
+    {
+        switch (m_type) {
+        case COLOR:
+            return color_property_t::value();
+        case GRADIENT:
+            return gradient_property_t::value();
+        case PALETTE_ROLE:
+            return palette_role_property_t::value();
+        }
+    }
 
 private:
     brush_type m_type;
 
 }; // struct brush_property_t
 
+// CONTINURE HERE
 struct url_property_t : virtual property_base_t
 {
     void set_url(const QString& u);
@@ -262,7 +312,7 @@ struct url_property_t : virtual property_base_t
 
 struct repeat_property_t : virtual property_base_t
 {
-    enum value
+    enum repeat_values
     {
         REPEAT_X = 0,
         REPEAT_Y,
@@ -295,7 +345,7 @@ private:
 
 struct border_style_property_t : virtual property_base_t
 {
-    enum values
+    enum border_style_values
     {
         DASHED = 0,
         DOT_DASH,
