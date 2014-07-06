@@ -185,6 +185,45 @@ public:
     static QString window() { return "window"; }
     static QString window_text() { return "window-text"; }
 
+    static QString url() { return "url"; }
+
+    static QString repeat_x() { return "repeat-x"; }
+    static QString repeat_y() { return "repeat-y"; }
+    static QString repeat() { return "repeat"; }
+    static QString no_repeat() { return "no-repeat"; }
+
+    static QString dashed() { return "dashed"; }
+    static QString dot_dash() { return "dot-dash"; }
+    static QString dot_dot_dash() { return "dot-dot-dash"; }
+    static QString dotted() { return "dotted"; }
+    static QString double_bstyle() { return "double"; }
+    static QString groove() { return "groove"; }
+    static QString inset() { return "inset"; }
+    static QString outset() { return "outset"; }
+    static QString ridge() { return "ridge"; }
+    static QString solid() { return "solid"; }
+    static QString none() { return "none"; }
+
+    static QString px() { return "px"; }
+    static QString pt() { return "pt"; }
+    static QString em() { return "em"; }
+    static QString ex() { return "ex"; }
+
+    static QString stretch() { return "stretch"; }
+
+    static QString normal() { return "normal"; }
+    static QString italic() { return "italic"; }
+    static QString oblique() { return "oblique"; }
+    static QString bold() { return "bold"; }
+
+    static QString disabled() { return "disabled"; }
+    static QString active() { return "active"; }
+    static QString selected() { return "selected"; }
+    static QString on() { return "on"; }
+    static QString off() { return "off"; }
+
+    static QString content() { return "content"; }
+
     /// property types
 public:
     static QString alignment_type_name() { return "Alignment"; }
@@ -193,6 +232,24 @@ public:
     static QString gradient_type_name() { return "Gradient"; }
     static QString palette_role_type_name() { return "PaletteRole"; }
     static QString brush_type_name() { return "Brush"; }
+    static QString url_type_name() { return "Url"; }
+    static QString repeat_type_name() { return "Repeat"; }
+    static QString background_type_name() { return "Background"; }
+    static QString border_style_type_name() { return "Border Style"; }
+    static QString number_type_name() { return "Number"; }
+    static QString length_type_name() { return "Length"; }
+    static QString border_type_name() { return "Border"; }
+    static QString border_image_type_name() { return "Border Image"; }
+    static QString box_colors_type_name() { return "Box Colors"; }
+    static QString box_lengths_type_name() { return "Box Lengths"; }
+    static QString font_size_type_name() { return "Font Size"; }
+    static QString font_style_type_name() { return "Font Style"; }
+    static QString font_weight_type_name() { return "Font Weight"; }
+    static QString font_type_name() { return "Font"; }
+    static QString boolean_type_name() { return "Boolean"; }
+    static QString icon_type_name() { return "Icon"; }
+    static QString origin_type_name() { return "Origin"; }
+    static QString radius_type_name() { return "Radius"; }
 
 }; // class style_component
 
