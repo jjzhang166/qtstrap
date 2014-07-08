@@ -145,9 +145,9 @@ public:
     static QString scroll() { return "scroll"; }
     static QString fixed() { return "fixed"; }
 
-    static QString qlineargradient() { "qlineargradient"; }
-    static QString qradialgradient() { "qradialgradient"; }
-    static QString qconicalgradient() { "qconicalgradient"; }
+    static QString qlineargradient() { return "qlineargradient"; }
+    static QString qradialgradient() { return "qradialgradient"; }
+    static QString qconicalgradient() { return "qconicalgradient"; }
 
     static QString x() { return "x"; }
     static QString y() { return "y"; }
@@ -250,6 +250,11 @@ public:
     static QString icon_type_name() { return "Icon"; }
     static QString origin_type_name() { return "Origin"; }
     static QString radius_type_name() { return "Radius"; }
+
+    /// property pseudo states
+public:
+    // TODO: think to return ":name" or just "name"
+    static QString pseudo_state_active() { return "active"; }
 
 }; // class style_component
 

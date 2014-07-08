@@ -1,13 +1,39 @@
 #ifndef QTSTRAP_BASE_PROPERTIES_H
 #define QTSTRAP_BASE_PROPERTIES_H
 
+#include <QScopedPointer>
+
+#include "property_types.h"
+#include "property_pseudo_states.h"
+
 namespace qtstrap
 {
 
 namespace base
 {
 
+struct property
+{
+    property() {  }
+    explicit property(property_base_t* pb) { m_type.reset(pb); }
+    virtual QString name() const = 0;
+    virtual QString suffix() const { return ""; }
+    virtual QString value() const
+    {
+        return name() + style_component::colon() + style_component::whitespace()
+                + m_type->value() + suffix() + style_component::semicolon();
+    }
 
+    virtual property_base_t* type() { return m_type.data(); }
+    virtual void set_type(property_base_t* t) { m_type.reset(t); }
+    virtual property_pseudo_state* pseudo_state() { return m_pseudo_state.data(); }
+    virtual void set_pseudo_state(property_pseudo_state* s) { m_pseudo_state.reset(s); }
+
+private:
+    QScopedPointer<property_base_t> m_type;
+    QScopedPointer<property_pseudo_state> m_pseudo_state;
+
+}; // struct property
 
 struct background_color_property : color_property_base
 {

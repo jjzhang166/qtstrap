@@ -6,7 +6,8 @@ namespace qtstrap
 namespace utl
 {
 
-double_map::double_map()
+template <typename Key, typename Value, class Container>
+double_map<Key, Value, Container>::double_map()
 {
 }
 
