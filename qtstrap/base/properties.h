@@ -26,16 +26,13 @@ struct property
 
     virtual property_base_t* type() { return m_type.data(); }
     virtual void set_type(property_base_t* t) { m_type.reset(t); }
-    virtual property_pseudo_state* pseudo_state() { return m_pseudo_state.data(); }
-    virtual void set_pseudo_state(property_pseudo_state* s) { m_pseudo_state.reset(s); }
 
 private:
     QScopedPointer<property_base_t> m_type;
-    QScopedPointer<property_pseudo_state> m_pseudo_state;
 
 }; // struct property
 
-struct background_color_property : color_property_base
+struct background_color_property : property
 {
     virtual QString name() const
     {
@@ -43,7 +40,7 @@ struct background_color_property : color_property_base
     }
 };
 
-struct alternate_background_color_property : color_property_base
+struct alternate_background_color_property : property
 {
     virtual QString name() const
     {
