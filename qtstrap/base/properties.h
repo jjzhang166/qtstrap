@@ -25,6 +25,8 @@ struct property
     }
 
     virtual property_base_t* type() { return m_type.data(); }
+
+protected:
     virtual void set_type(property_base_t* t) { m_type.reset(t); }
 
 private:
@@ -32,21 +34,51 @@ private:
 
 }; // struct property
 
-struct background_color_property : property
-{
-    virtual QString name() const
-    {
-        return style_component::background_color();
-    }
-};
-
+/// @struct alternate_background_color_property
+/// @group Brush (@ref brush_property_t)
 struct alternate_background_color_property : property
 {
     virtual QString name() const
     {
         return style_component::alternate_background_color();
     }
-};
+
+    virtual brush_property_t* type() { return m_type.data(); }
+    virtual void set_brush_type(brush_property_t* t) { set_type(t); }
+
+}; // struct alternate_background_color_property
+
+/// @struct background_property
+/// @group Background (@ref background_property_t)
+struct background_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background();
+    }
+
+    virtual background_property_t* type() { return m_type.data(); }
+    virtual void set_background_property(background_property_t* t) { set_type(t); }
+
+}; // struct background_property
+
+/// @struct background_color_property
+/// @group Brush
+struct background_color_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_color();
+    }
+
+    virtual brush_property_t* type() { return m_type.data(); }
+    virtual void set_brush_property(brush_property_t* t) { set_type(t); }
+
+}; // struct background_color_property
+
+// CONTINUE HERE with TODO
+// TODO: group property types, brush_property_base etc. ???
+
 
 struct border_color_property : color_property_base
 {
@@ -104,13 +136,6 @@ struct selection_background_color_property : color_property_base
     }
 };
 
-struct background_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background();
-    }
-};
 
 struct background_image_property : property_base
 {
