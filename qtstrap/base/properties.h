@@ -27,24 +27,29 @@ struct property
     virtual property_base_t* type() { return m_type.data(); }
 
 protected:
-    virtual void set_type(property_base_t* t) { m_type.reset(t); }
+    virtual void set_type(property_base_t* t) { Q_ASSERT(0 != t); m_type.reset(t); }
 
-private:
+protected:
     QScopedPointer<property_base_t> m_type;
 
 }; // struct property
 
+/// @struct brush_property_base
+/// @brief Base class for all brush type properties
+struct brush_property_base : virtual property
+{
+    virtual brush_property_t* type() { return m_type.data(); }
+    virtual void set_burhs_type(brush_property_t* t) { set_type(t); }
+};
+
 /// @struct alternate_background_color_property
 /// @group Brush (@ref brush_property_t)
-struct alternate_background_color_property : property
+struct alternate_background_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::alternate_background_color();
     }
-
-    virtual brush_property_t* type() { return m_type.data(); }
-    virtual void set_brush_type(brush_property_t* t) { set_type(t); }
 
 }; // struct alternate_background_color_property
 
@@ -58,67 +63,434 @@ struct background_property : property
     }
 
     virtual background_property_t* type() { return m_type.data(); }
-    virtual void set_background_property(background_property_t* t) { set_type(t); }
+    virtual void set_background_type(background_property_t* t) { set_type(t); }
 
 }; // struct background_property
 
 /// @struct background_color_property
 /// @group Brush
-struct background_color_property : property
+struct background_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::background_color();
     }
 
-    virtual brush_property_t* type() { return m_type.data(); }
-    virtual void set_brush_property(brush_property_t* t) { set_type(t); }
-
 }; // struct background_color_property
 
-// CONTINUE HERE with TODO
-// TODO: group property types, brush_property_base etc. ???
+/// @struct background_image_property
+/// @group Url
+struct background_image_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_image();
+    }
+
+    virtual url_property_t* type() { return m_type.data(); }
+    virtual void set_url_type(url_property_t* t) { set_type(t); }
+
+}; // struct background_image_property
+
+/// @struct background_repeat_property
+/// @group Repeat
+struct background_repeat_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_repeat();
+    }
+
+    virtual repeat_property_t* type() { return m_type.data(); }
+    virtual void set_repeat_type(repeat_property_t* t) { set_type(t); }
+
+}; // struct background_repeat_property
+
+/// @struct background_position_property
+/// @group Alignment
+struct background_position_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_position();
+    }
+
+    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
+
+}; // struct background_position_property
+
+/// @struct background_attachment_property
+/// @group Attachment
+struct background_attachment_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_attachment();
+    }
+
+    virtual attachment_property_t* type() { return m_type.data(); }
+    virtual void set_attachment_type(attachment_property_t* t) { set_type(t); }
+
+}; // struct background_attachment_property
+
+/// @struct background_clip_property
+/// @group Origin
+struct background_clip_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_clip();
+    }
+
+    virtual origin_property_t* type() { return m_type.data(); }
+    virtual void set_origin_type(origin_property_t* t) { set_type(t); }
+
+}; // struct background_clip_property
+
+/// @struct background_origin_property
+/// @group Origin
+struct background_origin_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::background_origin();
+    }
+
+    virtual origin_property_t* type() { return m_type.data(); }
+    virtual void set_origin_type(origin_property_t* t) { set_type(t); }
+
+}; // struct background_origin_property
 
 
-struct border_color_property : color_property_base
+/// @struct border_property_base The base class for all border type properties
+struct border_property_base : virtual property
+{
+    virtual border_property_t* type() { return m_type.data(); }
+    virtual void set_border_type(border_property_t* t) { set_type(t); }
+
+}; // struct border_property_base
+
+/// @struct border_property
+/// @group Border
+struct border_property : border_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border();
+    }
+
+}; // struct border_property
+
+/// @struct border_top_property
+/// @group Border
+struct border_top_property : border_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_top();
+    }
+
+}; // struct border_top_property
+
+/// @struct border_right_property
+/// @group Border
+struct border_right_property : border_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_right();
+    }
+
+}; // struct border_right_property
+
+/// @struct border_bottom_property
+/// @group Border
+struct border_bottom_property : border_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_bottom();
+    }
+
+}; // struct border_bottom_property
+
+/// @struct border_left_property
+/// @group Border
+struct border_left_property : border_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_left();
+    }
+
+}; // struct border_left_property
+
+
+/// @struct border_color_property
+/// @group Box Colors
+struct border_color_property : property
 {
     virtual QString name() const
     {
         return style_component::border_color();
     }
-};
 
-struct border_top_color_property : color_property_base
+    virtual box_colors_property_t* type() { return m_type.data(); }
+    virtual void set_box_colors_type(box_colors_property_t* t) { set_type(t); }
+
+}; // struct border_color_property
+
+
+/// @struct border_top_color_property
+/// @group Brush
+struct border_top_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::border_top_color();
     }
-};
 
-struct border_left_color_property : color_property_base
+}; // struct border_top_color_property
+
+/// @struct border_left_color_property
+/// @group Brush
+struct border_left_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::border_left_color();
     }
-};
 
-struct border_right_color_property : color_property_base
+}; // struct border_left_color_property
+
+/// @struct border_right_color_property
+/// @group Brush
+struct border_right_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::border_right_color();
     }
-};
 
-struct border_bottom_color_property : color_property_base
+}; // struct border_right_color_property
+
+/// @struct border_bottom_color_property
+/// @group Brush
+struct border_bottom_color_property : brush_property_base
 {
     virtual QString name() const
     {
         return style_component::border_bottom_color();
     }
+
+}; // struct border_bottom_color_property
+
+
+/// @struct border_image_property
+/// @group Border Image
+struct border_image_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::border_image();
+    }
+
+    virtual border_image_property_t* type() { return m_type.data(); }
+    virtual void set_border_image_type(border_image_property_t* t) { set_type(t); }
+
+}; // struct border_image_property
+
+
+/// @struct radius_property_base
+/// @brief Base class for all radius type properties
+struct radius_property_base : virtual property
+{
+    virtual radius_property_t* type() { return m_type.data(); }
+    virtual void set_radius_type(radius_property_t* t) { set_type(t); }
+
+}; // struct radius_property_base
+
+/// @struct border_radius_property
+/// @group Radius
+struct border_radius_property : radius_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_radius();
+    }
+
+}; // struct border_radius_property
+
+/// @struct border_top_left_radius_property
+/// @group Radius
+struct border_top_left_radius_property : radius_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_top_left_radius();
+    }
+
+}; // struct border_top_left_radius_property
+
+/// @struct border_top_right_radius_property
+/// @group Radius
+struct border_top_right_radius_property : radius_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_top_right_radius();
+    }
+
+}; // struct border_top_right_radius_property
+
+/// @struct border_bottom_right_radius_property
+/// @group Radius
+struct border_bottom_right_radius_property : radius_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_bottom_right_radius();
+    }
+
+}; // struct border_bottom_right_radius_property
+
+/// @struct border_bottom_left_radius_property
+/// @group Radius
+struct border_bottom_left_radius_property : radius_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_bottom_left_radius();
+    }
+
+}; // struct border_bottom_left_radius_property
+
+
+/// @struct border_style_base
+/// @brief Base class for all border style type properties
+struct border_style_property_base : virtual property
+{
+    virtual border_style_property_t* type() { return m_type.data(); }
+    virtual void set_border_style_type(border_style_property_t* t) { set_type(t); }
+
+}; // struct border_style_property_base
+
+/// @struct border_style_property
+/// @group Border Style
+struct border_style_property : border_style_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_style();
+    }
+
+}; // struct border_style_property
+
+/// @struct border_top_style_property
+/// @group Border Style
+struct border_top_style_property : border_style_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_top_style();
+    }
+
+}; // struct border_top_style_property
+
+/// @struct border_right_style_property
+/// @group Border Style
+struct border_right_style_property : border_style_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_right_style();
+    }
+
+}; // struct border_right_style_property
+
+/// @struct border_left_style_property
+/// @group Border Style
+struct border_left_style_property : border_style_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_left_style();
+    }
+
+}; // struct border_left_style_property
+
+/// @struct border_bottom_style_property
+/// @group Border Style
+struct border_bottom_style_property : border_style_property_base
+{
+    virtual QString name() const
+    {
+        return style_component::border_bottom_style();
+    }
+
+}; // struct border_bottom_style_property
+
+
+/// @struct border_width_property
+/// @group Box Lengths
+struct border_width_property : property
+{
+    virtual QString name() const
+    {
+        return style_component::border_width();
+    }
+
+    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
+
+}; // struct border_width_property
+
+
+/// @struct length_property_base
+/// @group Length
+struct length_property_base : virtual property
+{
+    virtual length_property_t* type() { return m_type.data(); }
+    virtual void set_length_type(length_property_t* t) { set_type(t); }
+
+}; // struct length_property_base
+
+/// @struct border_top_width
+/// @group Length
+struct border_top_width : length_property_base
+{
+    virtual QString name() const { return style_component::border_top_width(); }
 };
+
+/// @struct border_left_width
+/// @group Length
+struct border_left_width : length_property_base
+{
+    virtual QString name() const { return style_component::border_left_width(); }
+};
+
+/// @struct border_right_width
+/// @group Length
+struct border_right_width : length_property_base
+{
+    virtual QString name() const { return style_component::border_right_width(); }
+};
+
+/// @struct border_bottom_width
+/// @group Length
+struct border_bottom_width : length_property_base
+{
+    virtual QString name() const { return style_component::border_bottom_width(); }
+};
+
+// CONTINUE HERE
+// FROM: bottom
+
+
+
+
+
 
 struct color_property : color_property_base
 {
@@ -137,29 +509,9 @@ struct selection_background_color_property : color_property_base
 };
 
 
-struct background_image_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_image();
-    }
-};
 
-struct background_repeat_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_repeat();
-    }
-};
 
-struct background_position_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_position();
-    }
-};
+
 
 struct image_position_property : property_base
 {
@@ -185,13 +537,7 @@ struct text_align_property : property_base
     }
 };
 
-struct background_attachment_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_attachment();
-    }
-};
+
 
 struct dialogbuttonbox_buttons_have_icons_property : property_base
 {
@@ -209,21 +555,9 @@ struct show_decoration_selected_property : property_base
     }
 };
 
-struct background_clip_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_clip();
-    }
-};
 
-struct background_origin_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::background_origin();
-    }
-};
+
+
 
 struct subcontrol_origin_property : property_base
 {
@@ -233,149 +567,13 @@ struct subcontrol_origin_property : property_base
     }
 };
 
-struct border_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border();
-    }
-};
 
-struct border_top_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_top();
-    }
-};
 
-struct border_right_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_right();
-    }
-};
 
-struct border_bottom_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom();
-    }
-};
 
-struct border_left_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_left();
-    }
-};
 
-struct border_color_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_color();
-    }
-};
 
-struct border_image_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_image();
-    }
-};
 
-struct border_radius_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_radius();
-    }
-};
-
-struct border_top_left_radius_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_left_radius();
-    }
-};
-
-struct border_top_right_radius_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_right_radius();
-    }
-};
-
-struct border_bottom_right_radius_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_right_radius();
-    }
-};
-
-struct border_bottom_left_radius_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_left_radius();
-    }
-};
-
-struct border_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_style();
-    }
-};
-
-struct border_top_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_top_style();
-    }
-};
-
-struct border_right_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_right_style();
-    }
-};
-
-struct border_left_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_left_style();
-    }
-};
-
-struct border_bottom_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_bottom_style();
-    }
-};
-
-struct border_width_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::border_width();
-    }
-};
 
 struct margin_property : property_base
 {
