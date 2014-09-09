@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+// this will be used in koks
 namespace qtstrap
 {
 
