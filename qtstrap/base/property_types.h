@@ -123,10 +123,10 @@ private:
 
 }; // struct attachment_property_t
 
-/// @struct boolean_propert_t The Boolean Property, either 1 or 0
-struct boolean_propert_t : virtual property_base_t
+/// @struct boolean_property_t The Boolean Property, either 1 or 0
+struct boolean_property_t : virtual property_base_t
 {
-    virtual ~boolean_propert_t() {}
+    virtual ~boolean_property_t() {}
 
     virtual QString type_name() const { return style_component::boolean_type_name(); }
     virtual QString value() const { return m_boolean ? "1" : "0"; }

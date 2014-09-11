@@ -43,6 +43,7 @@ public:
     static QString color() { return "color"; }
 
     static QString selection_background_color() { return "selection-background-color"; }
+    static QString selection_color() { return "selection-color"; }
 
     static QString background() { return "background"; }
     static QString background_image() { return "background-image"; }

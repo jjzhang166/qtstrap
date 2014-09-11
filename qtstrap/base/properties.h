@@ -39,7 +39,7 @@ protected:
 struct brush_property_base : virtual property
 {
     virtual brush_property_t* type() { return m_type.data(); }
-    virtual void set_burhs_type(brush_property_t* t) { set_type(t); }
+    virtual void set_brush_type(brush_property_t* t) { set_type(t); }
 };
 
 /// @struct alternate_background_color_property
@@ -456,6 +456,12 @@ struct length_property_base : virtual property
 
 }; // struct length_property_base
 
+struct number_property_base : virtual property
+{
+    virtual number_property_t* type() { return m_type.data(); }
+    virtual void set_number_type(number_property_t* t) { set_type(t); }
+};
+
 /// @struct border_top_width
 /// @group Length
 struct border_top_width : length_property_base
@@ -484,384 +490,386 @@ struct border_bottom_width : length_property_base
     virtual QString name() const { return style_component::border_bottom_width(); }
 };
 
+/// @struct bottom
+/// @group Length
+struct bottom_property : length_property_base
+{
+    virtual QString name() const { return style_component::bottom(); }
+};
+
+/// @struct button_layout
+/// @group Number (@ref number_property_t)
+struct button_layout : number_property_base
+{
+    virtual QString name() const { return style_component::button_layout(); }
+};
+
+/// @struct color
+/// @group Brush (@ref brush_property_t)
+struct color : brush_property_base
+{
+    virtual QString name() const { return style_component::color(); }
+};
+
+/// @struct dialogbuttonbox_buttons_have_icons
+/// @group Boolean (@ref boolean_property_t)
+struct dialogbuttonbox_buttons_have_icons : property
+{
+    virtual QString name() const { return style_component::dialogbuttonbox_buttons_have_icons(); }
+
+    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
+};
+
+/// @struct font
+/// @group Font (@ref font_property_t)
+struct font : property
+{
+    virtual QString name() const { return style_component::font(); }
+
+    virtual font_property_t* type() { return m_type.data(); }
+    void set_font_type(font_property_t* t) { set_type(t); }
+};
+
+/// @struct font_family
+/// @group Font
+/// @note This property's type is plain string
+struct font_family : property
+{
+    virtual QString name() const { return style_component::font_family(); }
+
+    virtual QString type() { return m_string_type; }
+    virtual void set_string_type(const QString& str) { m_string_type = str; }
+
+private:
+    QString m_string_type;
+};
+
+/// @struct font_size
+/// @group Font
+struct font_size : property
+{
+    virtual QString name() const { return style_component::font_size(); }
+
+    virtual font_size_property_t* type() { return m_type.data(); }
+    virtual void set_font_size_type(font_size_property_t* t) { set_type(t); }
+};
+
+/// @struct font_style
+/// @group Font
+struct font_style : property
+{
+    virtual QString name() const { return style_component::font_style(); }
+
+    virtual font_style_property_t* type() { return m_type.data(); }
+    virtual void set_font_style_type(font_style_property_t* t) { set_type(t); }
+};
+
+/// @struct font_weight
+/// @group Font
+struct font_weight : property
+{
+    virtual QString name() const { return style_component::font_weight(); }
+
+    virtual font_weight_property_t* type() { return m_type.data(); }
+    virtual void set_font_weight_type(font_weight_property_t* t) { set_type(t); }
+};
+
+/// @struct gridline_color
+/// @group Color
+struct gridline_color : property
+{
+    virtual QString name() const { return style_component::gridline_color(); }
+
+    virtual color_property_t* type() { return m_type.data(); }
+    virtual void set_color_type(color_property_t* t) { set_type(t); }
+};
+
+/// @struct height
+/// @group Length
+struct height : length_property_base
+{
+    virtual QString name() const { return style_component::height(); }
+};
+
+/// @struct icon_size
+/// @group Length
+struct icon_size : length_property_base
+{
+    virtual QString name() const { return style_component::icon_size(); }
+};
+
+/// @struct image
+/// @group Url
+/// @note image has type Url+ meaning that accepts a list of Urls, current implementation accepts one Url
+struct image : property
+{
+    virtual QString name() const { return style_component::image(); }
+
+    virtual url_property_t* type() { return m_type.data(); }
+    virtual void set_url_type(url_property_t* t) { set_type(t); }
+};
+
+/// @struct image_position
+/// @group Alignment
+struct image_position : property
+{
+    virtual QString name() const { return style_component::image_position(); }
+
+    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
+};
+
+/// @struct left
+/// @Group Length
+struct left : length_property_base
+{
+    virtual QString name() const { return style_component::left(); }
+};
+
+/// @lineedit_password_character
+/// @group Number
+/// @brief The QLineEdit password character as a Unicode number.
+/// If this property is not specified, it defaults to the value specified by the current style for the SH_LineEdit_PasswordCharacter style hint.
+struct lineedit_password_character : number_property_base
+{
+    virtual QString name() const { return style_component::lineedit_password_character(); }
+};
+
+/// Margins
+/// @{
+///
+/// @struct margin
+/// @group Box Lengths
+struct margin : property
+{
+    virtual QString name() const { return style_component::margin(); }
+
+    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
+};
+
+struct margin_top : length_property_base
+{
+    virtual QString name() const { return style_component::margin_top(); }
+};
+
+struct margin_right : length_property_base
+{
+    virtual QString name() const { return style_component::margin_right(); }
+};
+
+struct margin_bottom : length_property_base
+{
+    virtual QString name() const { return style_component::margin_bottom(); }
+};
+
+struct margin_left : length_property_base
+{
+    virtual QString name() const { return style_component::margin_left(); }
+};
+
+/// @}
+
+/// Max/min length properties
+/// @{
+///
+/// @struct max_height
+/// @group Length
+struct max_height : length_property_base
+{
+    virtual QString name() const { return style_component::max_height(); }
+};
+
+struct max_width : length_property_base
+{
+    virtual QString name() const { return style_component::max_width(); }
+};
+
+struct min_height : length_property_base
+{
+    virtual QString name() const { return style_component::min_height(); }
+};
+
+struct min_width : length_property_base
+{
+    virtual QString name() const { return style_component::min_width(); }
+};
+
+/// @}
+
+/// @struct messagebox_text_interaction_flags
+/// @group Number
+struct messagebox_text_interaction_flags : number_property_base
+{
+    virtual QString name() const { return style_component::messagebox_text_interaction_flags(); }
+};
+
+/// @struct opacity
+/// @group Number
+struct opacity : number_property_base
+{
+    virtual QString name() const { return style_component::opacity(); }
+};
+
+/// @name Padding
+/// @{
+///
+/// @struct padding
+/// @group Box Lengths
+struct padding : property
+{
+    virtual QString name() const { return style_component::padding(); }
+
+    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
+};
+
+struct padding_top : length_property_base
+{
+    virtual QString name() const { return style_component::padding_top(); }
+};
+
+struct padding_right : length_property_base
+{
+    virtual QString name() const { return style_component::padding_right(); }
+};
+
+struct padding_bottom : length_property_base
+{
+    virtual QString name() const { return style_component::padding_bottom(); }
+};
+
+struct padding_left : length_property_base
+{
+    virtual QString name() const { return style_component::padding_left(); }
+};
+
+/// @}
+
+/// @struct paint_alternating_row_colors_for_empty_area
+/// @group Boolean
+struct paint_alternating_row_colors_for_empty_area : property
+{
+    virtual QString name() const { return style_component::paint_alternating_row_colors_for_empty_area(); }
+
+    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
+};
+
+/// @struct right
+/// @group Length
+struct right : length_property_base
+{
+    virtual QString name() const { return style_component::right(); }
+};
+
+/// @struct selection_background_color
+/// @group Brush
+struct selection_background_color : brush_property_base
+{
+    virtual QString name() const { return style_component::selection_background_color(); }
+};
+
+/// @struct selection_color
+/// @group Brush
+struct selection_color : brush_property_base
+{
+    virtual QString name() const { return style_component::selection_color(); }
+};
+
+/// @struct show_decoration_selected
+/// @group Boolean
+struct show_decoration_selected : property
+{
+    virtual QString name() const { return style_component::show_decoration_selected(); }
+
+    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
+};
+
+/// @struct spacing
+/// @group Length
+struct spacing : length_property_base
+{
+    virtual QString name() const { return style_component::spacing(); }
+};
+
+/// @struct subcontrol_origin
+/// @group Origin (@ref origin_property_t)
+struct subcontrol_origin : property
+{
+    virtual QString name() const { return style_component::subcontrol_origin(); }
+
+    virtual origin_property_t* type() { return m_type.data(); }
+    virtual void set_origin_type(origin_property_t* t) { set_type(t); }
+};
+
+/// @struct subcontrol_position
+/// @group Alignment
+struct subcontrol_position : property
+{
+    virtual QString name() const { return style_component::subcontrol_position(); }
+
+    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
+};
+
+/// @struct text_align
+/// @group Alignment
+struct text_align : property
+{
+    virtual QString name() const { return style_component::text_align(); }
+
+    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
+};
+
+/// @struct text_decoration
+/// @group None
+/// @note This property holds direct values, so using a separate enum for this
+struct text_decoration : property
+{
+    enum value
+    {
+        NONE = 0,
+        UNDERLINE,
+        OVERLINE,
+        LINE_THROUGH,
+
+        value_max
+    };
+
+    virtual QString name() const { return style_component::text_decoration(); }
+
+    virtual value type() { return m_decoration_value; }
+    virtual void set_decoration_type(value v) { m_decoration = v; }
+
+private:
+    value m_decoration;
+};
+
+/// @struct top
+/// @group Length
+struct top : length_property_base
+{
+    virtual QString name() const { return style_component::top(); }
+};
+
+/// @struct width
+/// @group Length
+struct width : length_property_base
+{
+    virtual QString name() const { return style_component::width(); }
+};
+
 // CONTINUE HERE
-// FROM: bottom
+// FROM:
 
 
 
 
 
-
-struct color_property : color_property_base
-{
-    virtual QString name() const
-    {
-        return style_component::color();
-    }
-};
-
-struct selection_background_color_property : color_property_base
-{
-    virtual QString name() const
-    {
-        return style_component::selection_background_color();
-    }
-};
-
-
-
-
-
-
-struct image_position_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::image_position();
-    }
-};
-
-struct subcontrol_position_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::subcontrol_position();
-    }
-};
-
-struct text_align_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::text_align();
-    }
-};
-
-
-
-struct dialogbuttonbox_buttons_have_icons_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::dialogbuttonbox_buttons_have_icons();
-    }
-};
-
-struct show_decoration_selected_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::show_decoration_selected();
-    }
-};
-
-
-
-
-
-struct subcontrol_origin_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::subcontrol_origin();
-    }
-};
-
-
-
-
-
-
-
-
-
-struct margin_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::margin();
-    }
-};
-
-struct padding_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::padding();
-    }
-};
-
-struct bottom_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::bottom();
-    }
-};
-
-struct left_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::left();
-    }
-};
-
-struct right_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::right();
-    }
-};
-
-struct top_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::top();
-    }
-};
-
-struct margin_top_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::margin_top();
-    }
-};
-
-struct margin_right_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::margin_right();
-    }
-};
-
-struct margin_left_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::margin_left();
-    }
-};
-
-struct margin_bottom_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::margin_bottom();
-    }
-};
-
-struct max_height_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::max_height();
-    }
-};
-
-struct max_width_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::max_width();
-    }
-};
-
-struct min_height_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::min_height();
-    }
-};
-
-struct min_width_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::min_width();
-    }
-};
-
-struct padding_top_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::padding_top();
-    }
-};
-
-struct padding_right_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::padding_right();
-    }
-};
-
-struct padding_left_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::padding_left();
-    }
-};
-
-struct padding_bottom_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::padding_bottom();
-    }
-};
-
-struct spacing_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::spacing();
-    }
-};
-
-struct width_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::width();
-    }
-};
-
-struct button_layout_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::button_layout();
-    }
-};
-
-struct height_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::height();
-    }
-};
-
-struct icon_size_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::icon_size();
-    }
-};
-
-struct lineedit_password_character_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::lineedit_password_character();
-    }
-};
-
-struct messagebox_text_interaction_flags_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::messagebox_text_interaction_flags();
-    }
-};
-
-struct opacity_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::opacity();
-    }
-};
-
-struct font_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::font();
-    }
-};
-
-struct font_family_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::font_family();
-    }
-};
-
-struct paint_alternating_row_colors_for_empty_area_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::paint_alternating_row_colors_for_empty_area();
-    }
-};
-
-struct font_size_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::font_size();
-    }
-};
-
-struct font_style_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::font_style();
-    }
-};
-
-struct font_weight_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::font_weight();
-    }
-};
-
-struct gridline_color_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::gridline_color();
-    }
-};
-
-struct image_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::image();
-    }
-};
-
-struct position_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::position();
-    }
-};
-
-struct text_decoration_property : property_base
-{
-    virtual QString name() const
-    {
-        return style_component::text_decoration();
-    }
-};
 
 } // namespace base
 
