@@ -2,6 +2,7 @@
 #define QTSTRAP_BASE_WIDGET_STYLE_H
 
 #include "styled_color.h"
+#include "properties.h"
 
 namespace qtstrap
 {
@@ -19,6 +20,7 @@ class widget_style
 {
 public:
     widget_style();
+
 
 
 private:

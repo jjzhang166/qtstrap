@@ -34,4 +34,4 @@ HEADERS  += main_window.h \
     utility/utility.h \
     base/styled_color.h \
     utility/double_map.h \
-    base/property_pseudo_states.h
+    base/widget_pseudo_states.h
