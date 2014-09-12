@@ -4,7 +4,6 @@
 #include <QScopedPointer>
 
 #include "property_types.h"
-#include "property_pseudo_states.h"
 
 namespace qtstrap
 {
@@ -15,6 +14,7 @@ namespace base
 struct property
 {
     property() {  }
+    virtual ~property() { }
     explicit property(property_base_t* pb) { m_type.reset(pb); }
     virtual QString name() const = 0;
     virtual QString suffix() const { return ""; }
@@ -38,7 +38,7 @@ protected:
 /// @brief Base class for all brush type properties
 struct brush_property_base : virtual property
 {
-    virtual brush_property_t* type() { return m_type.data(); }
+    virtual brush_property_t* type() { return dynamic_cast<brush_property_t*>(m_type.data()); }
     virtual void set_brush_type(brush_property_t* t) { set_type(t); }
 };
 
@@ -62,7 +62,7 @@ struct background_property : property
         return style_component::background();
     }
 
-    virtual background_property_t* type() { return m_type.data(); }
+    virtual background_property_t* type() { return dynamic_cast<background_property_t*>(m_type.data()); }
     virtual void set_background_type(background_property_t* t) { set_type(t); }
 
 }; // struct background_property
@@ -87,7 +87,7 @@ struct background_image_property : property
         return style_component::background_image();
     }
 
-    virtual url_property_t* type() { return m_type.data(); }
+    virtual url_property_t* type() { return dynamic_cast<url_property_t*>(m_type.data()); }
     virtual void set_url_type(url_property_t* t) { set_type(t); }
 
 }; // struct background_image_property
@@ -101,7 +101,7 @@ struct background_repeat_property : property
         return style_component::background_repeat();
     }
 
-    virtual repeat_property_t* type() { return m_type.data(); }
+    virtual repeat_property_t* type() { return dynamic_cast<repeat_property_t*>(m_type.data()); }
     virtual void set_repeat_type(repeat_property_t* t) { set_type(t); }
 
 }; // struct background_repeat_property
@@ -115,7 +115,7 @@ struct background_position_property : property
         return style_component::background_position();
     }
 
-    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual alignment_property_t* type() { return dynamic_cast<alignment_property_t*>(m_type.data()); }
     virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
 
 }; // struct background_position_property
@@ -129,7 +129,7 @@ struct background_attachment_property : property
         return style_component::background_attachment();
     }
 
-    virtual attachment_property_t* type() { return m_type.data(); }
+    virtual attachment_property_t* type() { return dynamic_cast<attachment_property_t*>(m_type.data()); }
     virtual void set_attachment_type(attachment_property_t* t) { set_type(t); }
 
 }; // struct background_attachment_property
@@ -143,7 +143,7 @@ struct background_clip_property : property
         return style_component::background_clip();
     }
 
-    virtual origin_property_t* type() { return m_type.data(); }
+    virtual origin_property_t* type() { return dynamic_cast<origin_property_t*>(m_type.data()); }
     virtual void set_origin_type(origin_property_t* t) { set_type(t); }
 
 }; // struct background_clip_property
@@ -157,7 +157,7 @@ struct background_origin_property : property
         return style_component::background_origin();
     }
 
-    virtual origin_property_t* type() { return m_type.data(); }
+    virtual origin_property_t* type() { return dynamic_cast<origin_property_t*>(m_type.data()); }
     virtual void set_origin_type(origin_property_t* t) { set_type(t); }
 
 }; // struct background_origin_property
@@ -166,7 +166,7 @@ struct background_origin_property : property
 /// @struct border_property_base The base class for all border type properties
 struct border_property_base : virtual property
 {
-    virtual border_property_t* type() { return m_type.data(); }
+    virtual border_property_t* type() { return dynamic_cast<border_property_t*>(m_type.data()); }
     virtual void set_border_type(border_property_t* t) { set_type(t); }
 
 }; // struct border_property_base
@@ -236,7 +236,7 @@ struct border_color_property : property
         return style_component::border_color();
     }
 
-    virtual box_colors_property_t* type() { return m_type.data(); }
+    virtual box_colors_property_t* type() { return dynamic_cast<box_colors_property_t*>(m_type.data()); }
     virtual void set_box_colors_type(box_colors_property_t* t) { set_type(t); }
 
 }; // struct border_color_property
@@ -296,7 +296,7 @@ struct border_image_property : property
         return style_component::border_image();
     }
 
-    virtual border_image_property_t* type() { return m_type.data(); }
+    virtual border_image_property_t* type() { return dynamic_cast<border_image_property_t*>(m_type.data()); }
     virtual void set_border_image_type(border_image_property_t* t) { set_type(t); }
 
 }; // struct border_image_property
@@ -306,7 +306,7 @@ struct border_image_property : property
 /// @brief Base class for all radius type properties
 struct radius_property_base : virtual property
 {
-    virtual radius_property_t* type() { return m_type.data(); }
+    virtual radius_property_t* type() { return dynamic_cast<radius_property_t*>(m_type.data()); }
     virtual void set_radius_type(radius_property_t* t) { set_type(t); }
 
 }; // struct radius_property_base
@@ -371,7 +371,7 @@ struct border_bottom_left_radius_property : radius_property_base
 /// @brief Base class for all border style type properties
 struct border_style_property_base : virtual property
 {
-    virtual border_style_property_t* type() { return m_type.data(); }
+    virtual border_style_property_t* type() { return dynamic_cast<border_style_property_t*>(m_type.data()); }
     virtual void set_border_style_type(border_style_property_t* t) { set_type(t); }
 
 }; // struct border_style_property_base
@@ -441,7 +441,7 @@ struct border_width_property : property
         return style_component::border_width();
     }
 
-    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual box_lengths_property_t* type() { return dynamic_cast<box_lengths_property_t*>(m_type.data()); }
     virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
 
 }; // struct border_width_property
@@ -451,14 +451,14 @@ struct border_width_property : property
 /// @group Length
 struct length_property_base : virtual property
 {
-    virtual length_property_t* type() { return m_type.data(); }
+    virtual length_property_t* type() { return dynamic_cast<length_property_t*>(m_type.data()); }
     virtual void set_length_type(length_property_t* t) { set_type(t); }
 
 }; // struct length_property_base
 
 struct number_property_base : virtual property
 {
-    virtual number_property_t* type() { return m_type.data(); }
+    virtual number_property_t* type() { return dynamic_cast<number_property_t*>(m_type.data()); }
     virtual void set_number_type(number_property_t* t) { set_type(t); }
 };
 
@@ -517,7 +517,7 @@ struct dialogbuttonbox_buttons_have_icons : property
 {
     virtual QString name() const { return style_component::dialogbuttonbox_buttons_have_icons(); }
 
-    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual boolean_property_t* type() { return dynamic_cast<boolean_property_t*>(m_type.data()); }
     virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
 };
 
@@ -527,7 +527,7 @@ struct font : property
 {
     virtual QString name() const { return style_component::font(); }
 
-    virtual font_property_t* type() { return m_type.data(); }
+    virtual font_property_t* type() { return dynamic_cast<font_property_t*>(m_type.data()); }
     void set_font_type(font_property_t* t) { set_type(t); }
 };
 
@@ -538,7 +538,7 @@ struct font_family : property
 {
     virtual QString name() const { return style_component::font_family(); }
 
-    virtual QString type() { return m_string_type; }
+    virtual QString string_type() { return m_string_type; }
     virtual void set_string_type(const QString& str) { m_string_type = str; }
 
 private:
@@ -551,7 +551,7 @@ struct font_size : property
 {
     virtual QString name() const { return style_component::font_size(); }
 
-    virtual font_size_property_t* type() { return m_type.data(); }
+    virtual font_size_property_t* type() { return dynamic_cast<font_size_property_t*>(m_type.data()); }
     virtual void set_font_size_type(font_size_property_t* t) { set_type(t); }
 };
 
@@ -561,7 +561,7 @@ struct font_style : property
 {
     virtual QString name() const { return style_component::font_style(); }
 
-    virtual font_style_property_t* type() { return m_type.data(); }
+    virtual font_style_property_t* type() { return dynamic_cast<font_style_property_t*>(m_type.data()); }
     virtual void set_font_style_type(font_style_property_t* t) { set_type(t); }
 };
 
@@ -571,7 +571,7 @@ struct font_weight : property
 {
     virtual QString name() const { return style_component::font_weight(); }
 
-    virtual font_weight_property_t* type() { return m_type.data(); }
+    virtual font_weight_property_t* type() { return dynamic_cast<font_weight_property_t*>(m_type.data()); }
     virtual void set_font_weight_type(font_weight_property_t* t) { set_type(t); }
 };
 
@@ -581,7 +581,7 @@ struct gridline_color : property
 {
     virtual QString name() const { return style_component::gridline_color(); }
 
-    virtual color_property_t* type() { return m_type.data(); }
+    virtual color_property_t* type() { return dynamic_cast<color_property_t*>(m_type.data()); }
     virtual void set_color_type(color_property_t* t) { set_type(t); }
 };
 
@@ -606,7 +606,7 @@ struct image : property
 {
     virtual QString name() const { return style_component::image(); }
 
-    virtual url_property_t* type() { return m_type.data(); }
+    virtual url_property_t* type() { return dynamic_cast<url_property_t*>(m_type.data()); }
     virtual void set_url_type(url_property_t* t) { set_type(t); }
 };
 
@@ -616,7 +616,7 @@ struct image_position : property
 {
     virtual QString name() const { return style_component::image_position(); }
 
-    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual alignment_property_t* type() { return dynamic_cast<alignment_property_t*>(m_type.data()); }
     virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
 };
 
@@ -645,7 +645,7 @@ struct margin : property
 {
     virtual QString name() const { return style_component::margin(); }
 
-    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual box_lengths_property_t* type() { return dynamic_cast<box_lengths_property_t*>(m_type.data()); }
     virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
 };
 
@@ -721,7 +721,7 @@ struct padding : property
 {
     virtual QString name() const { return style_component::padding(); }
 
-    virtual box_lengths_property_t* type() { return m_type.data(); }
+    virtual box_lengths_property_t* type() { return dynamic_cast<box_lengths_property_t*>(m_type.data()); }
     virtual void set_box_lengths_type(box_lengths_property_t* t) { set_type(t); }
 };
 
@@ -753,7 +753,7 @@ struct paint_alternating_row_colors_for_empty_area : property
 {
     virtual QString name() const { return style_component::paint_alternating_row_colors_for_empty_area(); }
 
-    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual boolean_property_t* type() { return dynamic_cast<boolean_property_t*>(m_type.data()); }
     virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
 };
 
@@ -784,7 +784,7 @@ struct show_decoration_selected : property
 {
     virtual QString name() const { return style_component::show_decoration_selected(); }
 
-    virtual boolean_property_t* type() { return m_type.data(); }
+    virtual boolean_property_t* type() { return dynamic_cast<boolean_property_t*>(m_type.data()); }
     virtual void set_boolean_type(boolean_property_t* t) { set_type(t); }
 };
 
@@ -801,7 +801,7 @@ struct subcontrol_origin : property
 {
     virtual QString name() const { return style_component::subcontrol_origin(); }
 
-    virtual origin_property_t* type() { return m_type.data(); }
+    virtual origin_property_t* type() { return dynamic_cast<origin_property_t*>(m_type.data()); }
     virtual void set_origin_type(origin_property_t* t) { set_type(t); }
 };
 
@@ -811,7 +811,7 @@ struct subcontrol_position : property
 {
     virtual QString name() const { return style_component::subcontrol_position(); }
 
-    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual alignment_property_t* type() { return dynamic_cast<alignment_property_t*>(m_type.data()); }
     virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
 };
 
@@ -821,7 +821,7 @@ struct text_align : property
 {
     virtual QString name() const { return style_component::text_align(); }
 
-    virtual alignment_property_t* type() { return m_type.data(); }
+    virtual alignment_property_t* type() { return dynamic_cast<alignment_property_t*>(m_type.data()); }
     virtual void set_alignment_type(alignment_property_t* t) { set_type(t); }
 };
 
@@ -842,7 +842,7 @@ struct text_decoration : property
 
     virtual QString name() const { return style_component::text_decoration(); }
 
-    virtual value type() { return m_decoration_value; }
+    virtual value decoration_type() { return m_decoration; }
     virtual void set_decoration_type(value v) { m_decoration = v; }
 
 private:

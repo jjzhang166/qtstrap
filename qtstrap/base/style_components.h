@@ -252,10 +252,93 @@ public:
     static QString origin_type_name() { return "Origin"; }
     static QString radius_type_name() { return "Radius"; }
 
-    /// property pseudo states
+    /// widget pseudo states
 public:
     // TODO: think to return ":name" or just "name"
     static QString pseudo_state_active() { return "active"; }
+    static QString pseudo_state_adjoins_item() { return "adjoins-item"; }
+    static QString pseudo_state_alternate() { return "alternate"; }
+    static QString pseudo_state_bottom() { return "bottom"; }
+    static QString pseudo_state_checked() { return "checked"; }
+    static QString pseudo_state_closable() { return "closable"; }
+    static QString pseudo_state_closed() { return "closed"; }
+    static QString pseudo_state_default() { return "default"; }
+    static QString pseudo_state_disabled() { return "disabled"; }
+    static QString pseudo_state_editable() { return "editable"; }
+    static QString pseudo_state_edit_focus() { return "edit-focus"; }
+    static QString pseudo_state_enabled() { return "enabled"; }
+    static QString pseudo_state_exclusive() { return "exclusive"; }
+    static QString pseudo_state_first() { return "first"; }
+    static QString pseudo_state_flat() { return "flat"; }
+    static QString pseudo_state_floatable() { return "floatable"; }
+    static QString pseudo_state_focus() { return "focus"; }
+    static QString pseudo_state_has_children() { return "has-children"; }
+    static QString pseudo_state_has_siblings() { return "has-siblings"; }
+    static QString pseudo_state_horizontal() { return "horizontal"; }
+    static QString pseudo_state_hover() { return "hover"; }
+    static QString pseudo_state_indeterminate() { return "indeterminate"; }
+    static QString pseudo_state_last() { return "last"; }
+    static QString pseudo_state_left() { return "left"; }
+    static QString pseudo_state_maximized() { return "maximized"; }
+    static QString pseudo_state_middle() { return "middle"; }
+    static QString pseudo_state_minimized() { return "minimized"; }
+    static QString pseudo_state_movable() { return "movable"; }
+    static QString pseudo_state_no_frame() { return "no-frame"; }
+    static QString pseudo_state_non_exclusive() { return "non-exclusive"; }
+    static QString pseudo_state_off() { return "off"; }
+    static QString pseudo_state_on() { return "on"; }
+    static QString pseudo_state_only_one() { return "only-one"; }
+    static QString pseudo_state_open() { return "open"; }
+    static QString pseudo_state_next_selected() { return "next-selected"; }
+    static QString pseudo_state_pressed() { return "pressed"; }
+    static QString pseudo_state_previous_selected() { return "previous-selected"; }
+    static QString pseudo_state_read_only() { return "read-only"; }
+    static QString pseudo_state_right() { return "right"; }
+    static QString pseudo_state_selected() { return "selected"; }
+    static QString pseudo_state_top() { return "top"; }
+    static QString pseudo_state_unchecked() { return "unchecked"; }
+    static QString pseudo_state_vertical() { return "vertical"; }
+    static QString pseudo_state_window() { return "window"; }
+
+    /// widget sub-controls
+public:
+    static QString sub_control_add_line() { return "add-line"; }
+    static QString sub_control_add_page() { return "add-page"; }
+    static QString sub_control_branch() { return "branch"; }
+    static QString sub_control_chunk() { return "chunk"; }
+    static QString sub_control_close_button() { return "close-buton"; }
+    static QString sub_control_corner() { return "corner"; }
+    static QString sub_control_down_arrow() { return "down-arrow"; }
+    static QString sub_control_down_button() { return "down-button"; }
+    static QString sub_control_drop_down() { return "drop-down"; }
+    static QString sub_control_float_button() { return "float-button"; }
+    static QString sub_control_groove() { return "groove"; }
+    static QString sub_control_indicator() { return "indicator"; }
+    static QString sub_control_handle() { return "handle"; }
+    static QString sub_control_icon() { return "icon"; }
+    static QString sub_control_item() { return "item"; }
+    static QString sub_control_left_arrow() { return "left-arrow"; }
+    static QString sub_control_left_corner() { return "left-corner"; }
+    static QString sub_control_menu_arrow() { return "menu-arrow"; }
+    static QString sub_control_menu_button() { return "menu-button"; }
+    static QString sub_control_menu_indicator() { return "menu-indicator"; }
+    static QString sub_control_right_arrow() { return "right-arrow"; }
+    static QString sub_control_pane() { return "pane"; }
+    static QString sub_control_right_corner() { return "right-corner"; }
+    static QString sub_control_scroller() { return "scroller"; }
+    static QString sub_control_section() { return "section"; }
+    static QString sub_control_separator() { return "separator"; }
+    static QString sub_control_sub_line() { return "sub-line"; }
+    static QString sub_control_sub_page() { return "sub-page"; }
+    static QString sub_control_tab() { return "tab"; }
+    static QString sub_control_tab_bar() { return "tab-bar"; }
+    static QString sub_control_tear() { return "tear"; }
+    static QString sub_control_tearoff() { return "tearoff"; }
+    static QString sub_control_text() { return "text"; }
+    static QString sub_control_title() { return "title"; }
+    static QString sub_control_up_arrow() { return "up-arrow"; }
+    static QString sub_control_up_button() { return "up-button"; }
+
 
 }; // class style_component
 

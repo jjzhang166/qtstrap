@@ -23,6 +23,7 @@ namespace base
 struct property_base_t
 {
 public:
+    property_base_t() {}
     virtual ~property_base_t() {}
 
 public:
@@ -178,7 +179,7 @@ public:
                 + SC::x2() + SC::colon() + QString::number(final.x()) + SC::comma()
                 + SC::y2() + SC::colon() + QString::number(final.y())
                 ; // the last comma is set by foreach
-        foreach (const QPair<qreal, QColor>& item, stops)
+        foreach (const QGradientStop& item, stops)
         {
             m_gradient += SC::comma() + SC::whitespace()
                     + SC::stop() + SC::colon()
@@ -199,7 +200,7 @@ public:
                 + SC::cy() + SC::colon() + QString::number(center.y()) + SC::comma()
                 + SC::angle() + SC::colon() + QString::number(angle)
                 ; // the last comma set by foreach
-        foreach (const QPair<qreal, QColor>& item, stops)
+        foreach (const QGradientStop& item, stops)
         {
             m_gradient += SC::comma() + SC::whitespace()
                     + SC::stop() + SC::colon()
@@ -224,7 +225,7 @@ public:
                 + SC::fx() + SC::colon() + QString::number(focal_point.x()) + SC::comma()
                 + SC::fy() + SC::colon() + QString::number(focal_point.y())
                 ; // the last comma set by foreach
-        foreach (const QPair<qreal, QColor>& item, items)
+        foreach (const QGradientStop& item, stops)
         {
             m_gradient += SC::comma() + SC::whitespace()
                     + SC::stop() + SC::colon()
@@ -333,7 +334,7 @@ struct brush_property_t : color_property_t, gradient_property_t,
     }
 
 public:
-    brush_type brush_type() const { return m_type; }
+    brush_type get_brush_type() const { return m_type; }
     void set_brush_type(brush_type t) { m_type = t; }
 
 private:
@@ -509,7 +510,7 @@ struct length_property_t : number_property_t
     }
 
 public:
-    set_length_unit(length_units u)
+    void set_length_unit(length_units u)
     {
         switch (u) {
         case PX:
@@ -591,8 +592,8 @@ public:
         if (-1 != d) { m_numbers += QString::number(d) + style_component::whitespace(); }
     }
 
-    void set_repeat(bool b) { m_repeat = b; }
-    void set_stretch(bool b) { m_stretch = b; }
+    void set_repeat(bool b) { m_is_repeat = b; }
+    void set_stretch(bool b) { m_is_stretch = b; }
 
 private:
     QString m_numbers;
@@ -604,7 +605,8 @@ private:
 /// @struct box_colors_property_t The Box Colors, Brush{1,4}
 struct box_colors_property_t : virtual property_base_t
 {
-    typedef const brush_property_t CBPT;
+    typedef brush_property_t BPT;
+    typedef const BPT CBPT;
 
     virtual ~box_colors_property_t() {}
 
