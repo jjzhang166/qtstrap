@@ -18,6 +18,8 @@ public:
     static QString colon() { return ":"; }
     static QString semicolon() { return ";"; }
     static QString comma() { return ","; }
+    static QString exclamation_point() { return "!"; }
+
     static QString parenthesis_open() { return "("; }
     static QString parenthesis_close() { return ")"; }
     static QString bracket_open() { return "["; }

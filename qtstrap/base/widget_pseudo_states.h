@@ -10,22 +10,21 @@ namespace qtstrap
 namespace base
 {
 
+/// @warning OR states are not supported in this release
 struct widget_pseudo_state
 {
-    widget_pseudo_state()
-        : m_is_negated(false)
+    explicit widget_pseudo_state(bool negated = false)
+        : m_is_negated(negated)
     {
     }
     virtual ~widget_pseudo_state() {}
 
     virtual QString name() const = 0;
-    virtual QString value()
+    virtual QString value() const
     {
-        // CRITICAL TODO
-        QString val = style_component::colon() + m_is_negated ? "!" : "";
-        val += name();
-        val += m_and_pseudo_state.isNull() ? "" :  m_and_pseudo_state->name(); // CRITICAL TODO: actually value() instead of name shall be used
-        val += m_or_pseudo_state.isNull() ? "" : m_or_pseudo_state->name();
+        return style_component::colon() + m_is_negated ? style_component::exclamation_point() : ""
+                        + name()
+                        + m_and_pseudo_state.isNull() ? "" :  m_and_pseudo_state->value();
     }
 
     virtual property* property_value() { return m_property.data(); }
@@ -33,13 +32,9 @@ struct widget_pseudo_state
 
     virtual widget_pseudo_state* and_pseudo_state() { return m_and_pseudo_state.data(); }
     virtual void set_and_pseudo_state(widget_pseudo_state* and_state) { m_and_pseudo_state.reset(and_state); }
-    virtual widget_pseudo_state* or_pseudo_state() { return m_or_pseudo_state.data(); }
-    virtual void set_or_pseudo_state(widget_pseudo_state* or_state) { m_or_pseudo_state.reset(or_state); }
 
 private:
-    QScopedPointer<property> m_property;
     QScopedPointer<widget_pseudo_state> m_and_pseudo_state;
-    QScopedPointer<widget_pseudo_state> m_or_pseudo_state;
     bool m_is_negated;
 };
 
