@@ -31,28 +31,34 @@ public:
 
     widget_style();
 
-    QString get_style() const;
+    QString get_style();
 
-    void set_widget_name(const QString& name);
     QString widget_name() const;
+    void set_widget_name(const QString& name);
 
     property_set main_properties();
     QString main_properties_as_string() const;
     void set_property(property* p);
 
     widget_pseudo_states_map widget_pseudo_state_properties();
-    QString widget_pseudo_state_properties_as_string() const;
+    QString widget_pseudo_state_properties_as_string();
     void set_pseudo_state_property(widget_pseudo_state* ps, property* p);
 
     widget_sub_controls_map widget_sub_control_properties();
-    QString widget_sub_control_properties_as_string() const;
+    QString widget_sub_control_properties_as_string();
     void set_sub_control_property(widget_sub_control* sc, property* p);
+
+private:
+    QString get_properties_as_string_(property_set props) const;
 
 private:
     QString m_widget_name;
     property_set m_main_property_set;
     widget_pseudo_states_map m_pseudo_state_properties;
     widget_sub_controls_map m_sub_control_properties;
+
+private:
+    static const QString k_default_widget_name;
 
 private:
     widget_style(const widget_style&);

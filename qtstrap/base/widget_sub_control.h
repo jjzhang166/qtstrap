@@ -20,7 +20,7 @@ struct widget_sub_control
     {
         return style_component::colon() + style_component::colon()
                 + name()
-                + m_pseudo_state.isNull() ? "" : m_pseudo_state->value();
+                + (m_pseudo_state.isNull() ? "" : m_pseudo_state->value());
     }
 
     virtual void set_pseudo_state(widget_pseudo_state* s) { Q_ASSERT(0 != s); m_pseudo_state.reset(s); }

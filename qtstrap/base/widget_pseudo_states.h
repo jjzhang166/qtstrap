@@ -22,13 +22,10 @@ struct widget_pseudo_state
     virtual QString name() const = 0;
     virtual QString value() const
     {
-        return style_component::colon() + m_is_negated ? style_component::exclamation_point() : ""
+        return style_component::colon() + (m_is_negated ? style_component::exclamation_point() : "")
                         + name()
-                        + m_and_pseudo_state.isNull() ? "" :  m_and_pseudo_state->value();
+                        + (m_and_pseudo_state.isNull() ? "" :  m_and_pseudo_state->value());
     }
-
-    virtual property* property_value() { return m_property.data(); }
-    virtual void set_property(property* t) { Q_ASSERT(0 != t); m_property.reset(t); }
 
     virtual widget_pseudo_state* and_pseudo_state() { return m_and_pseudo_state.data(); }
     virtual void set_and_pseudo_state(widget_pseudo_state* and_state) { m_and_pseudo_state.reset(and_state); }
@@ -255,7 +252,7 @@ struct vertical_pseudo_state : widget_pseudo_state
 
 struct window_pseudo_state : widget_pseudo_state
 {
-    virtual QString name() const { retrun style_component::window(); }
+    virtual QString name() const { return style_component::window(); }
 };
 
 } // namespace base
